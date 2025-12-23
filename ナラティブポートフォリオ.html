@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ナラティブ・ポートフォリオ（サンプル）</title>
+  <meta name="description" content="中高生のためのナラティブ・ポートフォリオ（サンプルUI）。素材収集→意味づけ→出力までを一枚で確認できます。" />
+  <style>
+    :root{
+      --bg:#0b0f17; --card:#0f172a; --muted:#94a3b8; --text:#e5e7eb;
+      --line:rgba(148,163,184,.18); --accent:#60a5fa; --accent2:#a78bfa; --ok:#34d399;
+      --warn:#fbbf24; --bad:#fb7185; --chip:rgba(96,165,250,.14);
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, Arial, sans-serif;
+      background: radial-gradient(1100px 700px at 10% 0%, rgba(96,165,250,.18), transparent 55%),
+                  radial-gradient(900px 600px at 90% 20%, rgba(167,139,250,.16), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit}
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 16px 64px}
+    header{
+      display:flex; gap:16px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
+      padding:22px; background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .title{display:flex; flex-direction:column; gap:10px; min-width:260px}
+    h1{margin:0; font-size:22px; letter-spacing:.02em}
+    .sub{color:var(--muted); font-size:13px; line-height:1.5}
+    .meta{display:flex; gap:10px; flex-wrap:wrap}
+    .pill{
+      padding:8px 10px; border:1px solid var(--line); border-radius:999px; font-size:12px;
+      background: rgba(255,255,255,.03);
+    }
+    .pill strong{font-weight:700}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    button{
+      appearance:none; border:1px solid var(--line); background: rgba(255,255,255,.03); color:var(--text);
+      padding:10px 12px; border-radius:12px; cursor:pointer; font-size:13px;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+    }
+    button:hover{background: rgba(255,255,255,.06); border-color: rgba(96,165,250,.35)}
+    button:active{transform: translateY(1px)}
+    .primary{
+      border-color: rgba(96,165,250,.55);
+      background: linear-gradient(180deg, rgba(96,165,250,.18), rgba(96,165,250,.06));
+    }
+    .grid{
+      margin-top:18px;
+      display:grid; grid-template-columns: 1.2fr .8fr; gap:14px;
+    }
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
+    .card{
+      background: rgba(15,23,42,.74);
+      border:1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardHead{
+      padding:14px 16px; display:flex; justify-content:space-between; gap:12px; align-items:flex-start;
+      border-bottom:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+    .cardHead h2{margin:0; font-size:15px}
+    .hint{color:var(--muted); font-size:12px; line-height:1.5}
+    .cardBody{padding:14px 16px}
+    .row{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+    @media (max-width: 680px){ .row{grid-template-columns:1fr} }
+    label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
+    input, textarea, select{
+      width:100%; background: rgba(2,6,23,.45);
+      border:1px solid var(--line); color:var(--text);
+      padding:10px 10px; border-radius:12px; font-size:13px;
+      outline:none;
+    }
+    textarea{min-height:96px; resize:vertical}
+    input:focus, textarea:focus, select:focus{border-color: rgba(96,165,250,.45)}
+    .chips{display:flex; gap:8px; flex-wrap:wrap}
+    .chip{
+      padding:6px 10px; border-radius:999px; font-size:12px;
+      border:1px solid rgba(96,165,250,.28);
+      background: var(--chip);
+      color: rgba(191,219,254,1);
+    }
+    .kpi{
+      display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px; margin-top:10px
+    }
+    @media (max-width: 680px){ .kpi{grid-template-columns:1fr} }
+    .kpiBox{
+      padding:12px; border:1px solid var(--line); border-radius:14px;
+      background: rgba(255,255,255,.02);
+    }
+    .kpiBox .k{color:var(--muted); font-size:12px}
+    .kpiBox .v{font-size:16px; margin-top:6px}
+    .tag{display:inline-block; font-size:11px; padding:4px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted)}
+    .list{display:flex; flex-direction:column; gap:10px}
+    .item{
+      padding:12px; border:1px solid var(--line); border-radius:14px; background: rgba(255,255,255,.02);
+      display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
+    }
+    .itemMain{min-width:0}
+    .itemTitle{margin:0; font-size:14px}
+    .itemMeta{margin-top:6px; color:var(--muted); font-size:12px; line-height:1.5}
+    .itemBtns{display:flex; gap:8px; flex-wrap:wrap}
+    .mini{padding:8px 10px; font-size:12px; border-radius:12px}
+    .danger{border-color: rgba(251,113,133,.45); background: rgba(251,113,133,.08)}
+    .ok{border-color: rgba(52,211,153,.45); background: rgba(52,211,153,.08)}
+    .split{
+      margin-top:12px; padding-top:12px; border-top:1px dashed rgba(148,163,184,.22)
+    }
+    .twoCol{
+      display:grid; grid-template-columns: 1fr 1fr; gap:12px;
+    }
+    @media (max-width: 680px){ .twoCol{grid-template-columns:1fr} }
+    .muted{color:var(--muted)}
+    .preview{
+      white-space:pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px; line-height:1.6;
+      background: rgba(2,6,23,.55);
+      border:1px solid var(--line);
+      border-radius:14px; padding:12px;
+      max-height: 340px; overflow:auto;
+    }
+    footer{
+      margin-top:14px; color:var(--muted); font-size:12px; line-height:1.6;
+      padding:0 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>ナラティブ・ポートフォリオ（サンプルUI）</h1>
+        <div class="sub">
+          「素材を集める（中1–中2）」→「意味づけする（中2後半–高）」→「出力する（面接・志望理由・就活）」を一枚で確認するデモです。<br>
+          ※これは見本です。入力データはブラウザ内に保存されます（ローカルストレージ）。
+        </div>
+        <div class="meta">
+          <span class="pill"><strong>対象</strong> 中1–高3</span>
+          <span class="pill"><strong>モード</strong> 素材収集 / 編集・翻訳</span>
+          <span class="pill"><strong>出力</strong> 志望理由・面接用サマリ</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="primary" id="seedBtn">サンプルを読み込む</button>
+        <button id="saveBtn">保存</button>
+        <button id="exportBtn">テキスト出力</button>
+        <button class="danger" id="resetBtn">全削除</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Left: Input -->
+      <section class="card">
+        <div class="cardHead">
+          <div>
+            <h2>① 素材を入れる（出来事・興味・ひっかかり）</h2>
+            <div class="hint">「結論を出さない」「うまく言えなくていい」「矛盾が残っていていい」—素材のまま貯めます。</div>
+          </div>
+          <span class="tag">中1〜中2の主戦場</span>
+        </div>
+        <div class="cardBody">
+          <div class="row">
+            <div>
+              <label>日付</label>
+              <input type="date" id="date" />
+            </div>
+            <div>
+              <label>カテゴリ</label>
+              <select id="category">
+                <option value="学び">学び</option>
+                <option value="活動">活動</option>
+                <option value="人間関係">人間関係</option>
+                <option value="趣味">趣味</option>
+                <option value="挑戦">挑戦</option>
+                <option value="失敗">失敗</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="split"></div>
+
+          <div class="row">
+            <div>
+              <label>タイトル（短く）</label>
+              <input id="title" placeholder="例：文化祭の企画で揉めた／英語で発表してみた など" />
+            </div>
+            <div>
+              <label>強みタグ（複数OK）</label>
+              <input id="tags" placeholder="例：探究/調整/継続/観察/表現（カンマ区切り）" />
+            </div>
+          </div>
+
+          <div class="split"></div>
+
+          <div class="twoCol">
+            <div>
+              <label>事実（何が起きた？）</label>
+              <textarea id="facts" placeholder="例：班で役割が決まらず…／発表で質問が出て…"></textarea>
+            </div>
+            <div>
+              <label>感情（どう感じた？）</label>
+              <textarea id="feelings" placeholder="例：悔しかった／焦った／楽しかった／モヤモヤした"></textarea>
+            </div>
+          </div>
+
+          <div class="split"></div>
+
+          <div class="twoCol">
+            <div>
+              <label>ひっかかり（何が気になった？）</label>
+              <textarea id="hook" placeholder="例：なぜ意見が割れた？／どう伝えればよかった？"></textarea>
+            </div>
+            <div>
+              <label>次の一歩（小さく）</label>
+              <textarea id="next" placeholder="例：他のやり方を調べる／次は役割を早めに…"></textarea>
+            </div>
+          </div>
+
+          <div class="split"></div>
+
+          <div class="actions" style="justify-content:flex-start">
+            <button class="primary" id="addBtn">素材として追加</button>
+            <button id="clearFormBtn">入力をクリア</button>
+          </div>
+
+          <div class="kpi">
+            <div class="kpiBox">
+              <div class="k">素材数</div>
+              <div class="v" id="kpiItems">0</div>
+            </div>
+            <div class="kpiBox">
+              <div class="k">主要タグ</div>
+              <div class="v" id="kpiTags">—</div>
+            </div>
+            <div class="kpiBox">
+              <div class="k">最近のカテゴリ</div>
+              <div class="v" id="kpiCats">—</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Library + Output -->
+      <aside class="card">
+        <div class="cardHead">
+          <div>
+            <h2>② 素材ライブラリ / ③ 出力（面接・志望理由の下書き）</h2>
+            <div class="hint">高校生は「編集・翻訳」が中心。中学生は「貯める」が中心。</div>
+          </div>
+          <span class="tag">中2後半〜高校の主戦場</span>
+        </div>
+        <div class="cardBody">
+          <div class="row">
+            <div>
+              <label>検索（タイトル・本文・タグ）</label>
+              <input id="q" placeholder="例：文化祭 / 継続 / 探究 など" />
+            </div>
+            <div>
+              <label>フィルタ（カテゴリ）</label>
+              <select id="filterCat">
+                <option value="">すべて</option>
+                <option value="学び">学び</option>
+                <option value="活動">活動</option>
+                <option value="人間関係">人間関係</option>
+                <option value="趣味">趣味</option>
+                <option value="挑戦">挑戦</option>
+                <option value="失敗">失敗</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="split"></div>
+
+          <div class="list" id="list"></div>
+
+          <div class="split"></div>
+
+          <div class="twoCol">
+            <div>
+              <label>出力モード</label>
+              <select id="outMode">
+                <option value="shibou">志望理由（短い骨子）</option>
+                <option value="mensetsu">面接（想定QA）</option>
+                <option value="job">就職（自己PR骨子）</option>
+              </select>
+              <p class="muted" style="margin:8px 0 0">
+                ここは「完成文章」ではなく、話す/書くための素材を並べ替える場所です。
+              </p>
+            </div>
+            <div>
+              <label>焦点（この出力で伝えたい軸）</label>
+              <input id="focus" placeholder="例：探究心 / 調整力 / 継続 / 表現 など" />
+              <p class="muted" style="margin:8px 0 0">
+                「良い話」より「本物の変化」を選んでください。
+              </p>
+            </div>
+          </div>
+
+          <div class="split"></div>
+
+          <div class="actions" style="justify-content:flex-start">
+            <button class="ok" id="buildBtn">選択素材から出力を作る</button>
+            <button id="copyBtn">出力をコピー</button>
+          </div>
+
+          <div class="split"></div>
+
+          <label>出力プレビュー</label>
+          <div class="preview" id="preview">（まだ出力はありません）</div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div>
+        このUIは「事実」と「感情」を分けて記録し、後から編集して“使える形”に翻訳することを意図しています。<br>
+        目的は「きれいな物語」ではなく、時間の中で生じた思考・変化のログを残すことです。
+      </div>
+    </footer>
+  </div>
+
+<script>
+  const KEY = "narrative_portfolio_v1";
+
+  const $ = (id)=>document.getElementById(id);
+  const state = {
+    items: [],
+    selected: new Set()
+  };
+
+  function load(){
+    const raw = localStorage.getItem(KEY);
+    if(!raw) return;
+    try{
+      const data = JSON.parse(raw);
+      state.items = Array.isArray(data.items) ? data.items : [];
+      state.selected = new Set();
+    }catch(e){
+      console.warn("load failed", e);
+    }
+  }
+  function save(){
+    localStorage.setItem(KEY, JSON.stringify({items: state.items}));
+    toast("保存しました");
+    render();
+  }
+  function resetAll(){
+    if(!confirm("本当に全削除しますか？（元に戻せません）")) return;
+    localStorage.removeItem(KEY);
+    state.items = [];
+    state.selected = new Set();
+    render();
+    toast("全削除しました");
+  }
+
+  function toast(msg){
+    const el = document.createElement("div");
+    el.textContent = msg;
+    el.style.position="fixed";
+    el.style.left="50%";
+    el.style.bottom="18px";
+    el.style.transform="translateX(-50%)";
+    el.style.padding="10px 12px";
+    el.style.border="1px solid rgba(148,163,184,.25)";
+    el.style.background="rgba(15,23,42,.92)";
+    el.style.borderRadius="12px";
+    el.style.boxShadow="0 14px 40px rgba(0,0,0,.35)";
+    el.style.zIndex="9999";
+    el.style.fontSize="13px";
+    document.body.appendChild(el);
+    setTimeout(()=>{el.remove()}, 1200);
+  }
+
+  function clearForm(){
+    $("date").value = "";
+    $("category").value = "学び";
+    $("title").value = "";
+    $("tags").value = "";
+    $("facts").value = "";
+    $("feelings").value = "";
+    $("hook").value = "";
+    $("next").value = "";
+  }
+
+  function addItem(){
+    const date = $("date").value || new Date().toISOString().slice(0,10);
+    const category = $("category").value;
+    const title = $("title").value.trim();
+    if(!title){
+      alert("タイトルは必須です（短くでOK）");
+      return;
+    }
+    const tags = $("tags").value
+      .split(",")
+      .map(s=>s.trim())
+      .filter(Boolean);
+
+    const item = {
+      id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random(),
+      date, category, title, tags,
+      facts: $("facts").value.trim(),
+      feelings: $("feelings").value.trim(),
+      hook: $("hook").value.trim(),
+      next: $("next").value.trim(),
+      createdAt: Date.now()
+    };
+    state.items.unshift(item);
+    save();
+    clearForm();
+  }
+
+  function seed(){
+    const samples = [
+      {
+        date:"2025-05-12", category:"活動",
+        title:"文化祭の企画で意見が割れたが、落とし所を探した",
+        tags:["調整","傾聴","合意形成"],
+        facts:"企画案が2つに割れ、LINEで口論になりかけた。担任に言われる前に、班で話し合いの場を作った。",
+        feelings:"焦り、嫌われる不安、でもこのままでは進まないという気持ち。",
+        hook:"なぜ同じ目的でも意見が割れるのか。合意は“正しさ”より“納得”なのか。",
+        next:"議論の前に目的・条件を共有する。反対意見を要約して確認する。"
+      },
+      {
+        date:"2025-06-03", category:"学び",
+        title:"理科の実験で仮説が外れた。外れた理由を追った",
+        tags:["探究","検証","粘り強さ"],
+        facts:"予想と逆の結果が出た。データの取り方を見直し、条件を変えて再実験した。",
+        feelings:"悔しい。でも“外れた”ことが面白く感じた。",
+        hook:"仮説が外れるとき、何が“ズレ”の原因になるのか。",
+        next:"変数を一つずつ動かして記録する。自分の思い込みを言語化する。"
+      },
+      {
+        date:"2025-07-20", category:"失敗",
+        title:"部活で練習メニューを提案したが通らなかった",
+        tags:["提案","改善","ふり返り"],
+        facts:"練習の質を上げたいと提案したが、先輩から“今はそれより基礎”と言われた。",
+        feelings:"恥ずかしさ、落ち込み、でも言ってよかった感。",
+        hook:"提案は“正しさ”だけでは通らない。相手の優先順位を理解する必要がある。",
+        next:"相手の目標と制約を先に聞き、提案を小さく試す形にする。"
+      }
+    ];
+    state.items = samples.map(s=>({
+      ...s,
+      id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random(),
+      createdAt: Date.now()
+    })).concat(state.items);
+    save();
+  }
+
+  function render(){
+    // KPIs
+    $("kpiItems").textContent = String(state.items.length);
+
+    const tagCount = new Map();
+    const catCount = new Map();
+    state.items.forEach(it=>{
+      (it.tags||[]).forEach(t=>tagCount.set(t, (tagCount.get(t)||0)+1));
+      catCount.set(it.category, (catCount.get(it.category)||0)+1);
+    });
+    const topTags = [...tagCount.entries()].sort((a,b)=>b[1]-a[1]).slice(0,3).map(([t,c])=>t);
+    const topCats = [...catCount.entries()].sort((a,b)=>b[1]-a[1]).slice(0,3).map(([c])=>c);
+
+    $("kpiTags").textContent = topTags.length ? topTags.join(" / ") : "—";
+    $("kpiCats").textContent = topCats.length ? topCats.join(" / ") : "—";
+
+    // list
+    const q = $("q").value.trim().toLowerCase();
+    const fc = $("filterCat").value;
+
+    const filtered = state.items.filter(it=>{
+      if(fc && it.category !== fc) return false;
+      if(!q) return true;
+      const hay = [
+        it.title, it.category,
+        (it.tags||[]).join(" "),
+        it.facts, it.feelings, it.hook, it.next
+      ].join(" ").toLowerCase();
+      return hay.includes(q);
+    });
+
+    const list = $("list");
+    list.innerHTML = "";
+
+    if(!filtered.length){
+      const empty = document.createElement("div");
+      empty.className="muted";
+      empty.textContent="（該当する素材がありません）";
+      list.appendChild(empty);
+      return;
+    }
+
+    filtered.forEach(it=>{
+      const item = document.createElement("div");
+      item.className="item";
+
+      const main = document.createElement("div");
+      main.className="itemMain";
+
+      const title = document.createElement("p");
+      title.className="itemTitle";
+      title.textContent = it.title;
+
+      const meta = document.createElement("div");
+      meta.className="itemMeta";
+      const tags = (it.tags||[]).map(t=>`#${t}`).join(" ");
+      meta.innerHTML = `<span class="tag">${it.date}</span> <span class="tag">${it.category}</span><br>${tags || ""}`;
+
+      const detail = document.createElement("div");
+      detail.className="itemMeta";
+      detail.textContent = (it.hook ? `ひっかかり：${it.hook}` : (it.facts ? `事実：${it.facts}` : ""));
+
+      main.appendChild(title);
+      main.appendChild(meta);
+      main.appendChild(detail);
+
+      const btns = document.createElement("div");
+      btns.className="itemBtns";
+
+      const isSel = state.selected.has(it.id);
+      const selBtn = document.createElement("button");
+      selBtn.className = "mini " + (isSel ? "ok" : "");
+      selBtn.textContent = isSel ? "選択中" : "選択する";
+      selBtn.onclick = ()=>{
+        if(state.selected.has(it.id)) state.selected.delete(it.id);
+        else state.selected.add(it.id);
+        render();
+      };
+
+      const delBtn = document.createElement("button");
+      delBtn.className="mini danger";
+      delBtn.textContent="削除";
+      delBtn.onclick = ()=>{
+        if(!confirm("この素材を削除しますか？")) return;
+        state.items = state.items.filter(x=>x.id!==it.id);
+        state.selected.delete(it.id);
+        save();
+      };
+
+      btns.appendChild(selBtn);
+      btns.appendChild(delBtn);
+
+      item.appendChild(main);
+      item.appendChild(btns);
+      list.appendChild(item);
+    });
+  }
+
+  function buildOutput(){
+    const focus = $("focus").value.trim();
+    const mode = $("outMode").value;
+
+    const picked = state.items.filter(it=>state.selected.has(it.id));
+    if(!picked.length){
+      alert("出力に使う素材を右の一覧から「選択」してください。");
+      return;
+    }
+
+    const lines = [];
+    const header = `【出力モード】${modeLabel(mode)}\n【焦点】${focus || "（未指定）"}\n【素材数】${picked.length}\n`;
+    lines.push(header);
+
+    // 共通：変化の抽出（簡易）
+    lines.push("■ 使う素材（時系列）");
+    picked.slice().reverse().forEach((it, idx)=>{
+      lines.push(`(${idx+1}) ${it.date} / ${it.category}：${it.title}`);
+      if(it.facts) lines.push(`  - 事実：${it.facts}`);
+      if(it.feelings) lines.push(`  - 感情：${it.feelings}`);
+      if(it.hook) lines.push(`  - ひっかかり：${it.hook}`);
+      if(it.next) lines.push(`  - 次の一歩：${it.next}`);
+      if(it.tags && it.tags.length) lines.push(`  - タグ：${it.tags.join(", ")}`);
+    });
+
+    lines.push("\n■ 編集メモ（ここが“実は…”の部分）");
+    lines.push("・上の出来事から、考え方がどう変わったか（Before→After）を一文で書く");
+    lines.push("・矛盾が残っていてOK。結論を無理に作らない");
+    lines.push("・評価の言葉（すごい/完璧）ではなく、具体の行動と言い換える");
+
+    if(mode === "shibou"){
+      lines.push("\n■ 志望理由（骨子・短い型）");
+      lines.push("1) 関心の起点：何に引っかかったか（ひっかかりを引用）");
+      lines.push("2) 行動：どう調べ、試し、工夫したか（事実を引用）");
+      lines.push("3) 学び：何が変わったか（編集メモのBefore→After）");
+      lines.push("4) 次：大学/高校で何を深めたいか（次の一歩を拡張）");
+    }else if(mode === "mensetsu"){
+      lines.push("\n■ 面接（想定Q→Aの素材）");
+      lines.push("Q1. 最近の挑戦は？ → 出来事(1)を使い、行動を具体で話す");
+      lines.push("Q2. 失敗から何を学んだ？ → 出来事(2)を使い、“次の一歩”で締める");
+      lines.push("Q3. あなたの強みは？ → タグの共通項を一つ選び、根拠を2例出す");
+    }else if(mode === "job"){
+      lines.push("\n■ 就職（自己PR骨子）");
+      lines.push("・強み（1語）：例）調整力/探究心/継続力");
+      lines.push("・根拠エピソード：出来事(1)(2)から1つずつ");
+      lines.push("・再現性：次の一歩にある“やり方”を仕事に置き換える");
+      lines.push("・貢献：その強みで組織に何を増やせるか（具体）");
+    }
+
+    $("preview").textContent = lines.join("\n");
+    toast("出力を生成しました");
+  }
+
+  function modeLabel(m){
+    return m==="shibou" ? "志望理由（短い骨子）"
+         : m==="mensetsu" ? "面接（想定QA）"
+         : "就職（自己PR骨子）";
+  }
+
+  async function copyPreview(){
+    const text = $("preview").textContent;
+    try{
+      await navigator.clipboard.writeText(text);
+      toast("コピーしました");
+    }catch(e){
+      alert("コピーできませんでした。手動で選択してコピーしてください。");
+    }
+  }
+
+  function exportText(){
+    const text = $("preview").textContent;
+    const blob = new Blob([text], {type:"text/plain;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "narrative_output.txt";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // wire
+  $("addBtn").onclick = addItem;
+  $("clearFormBtn").onclick = clearForm;
+  $("saveBtn").onclick = save;
+  $("resetBtn").onclick = resetAll;
+  $("seedBtn").onclick = seed;
+  $("buildBtn").onclick = buildOutput;
+  $("copyBtn").onclick = copyPreview;
+  $("exportBtn").onclick = exportText;
+  $("q").oninput = render;
+  $("filterCat").onchange = render;
+
+  // init
+  load();
+  render();
+</script>
+</body>
+</html>
