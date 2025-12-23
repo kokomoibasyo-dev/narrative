@@ -2,78 +2,287 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>My Narrative Portfolio</title>
+<title>白木楓｜ナラティブ・ポートフォリオ</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="白木楓のナラティブ・ポートフォリオ。料理とお菓子作りを通して見つけた、自分の道とこれからの物語。" />
 <style>
-body{margin:0;font-family:sans-serif;background:#0b0f17;color:#e5e7eb}
-.wrap{max-width:900px;margin:auto;padding:24px}
-.card{background:#111827;border-radius:16px;padding:16px;margin-bottom:16px}
-h1,h2{margin:0 0 8px}
-input,textarea{width:100%;background:#020617;color:#e5e7eb;border:1px solid #334155;border-radius:12px;padding:10px}
-button{margin-top:8px;padding:10px 14px;border-radius:12px;border:none;background:#3b82f6;color:white}
-.media img,iframe{max-width:100%;border-radius:12px;margin-top:8px}
-.log{border-top:1px dashed #475569;padding-top:12px;margin-top:12px}
-.small{color:#94a3b8;font-size:12px}
+:root{
+  --bg:#fbf7f2;
+  --card:#ffffff;
+  --accent:#d9776f;
+  --text:#3a2f2a;
+  --muted:#7a6a63;
+  --line:#eadfd7;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.8;
+}
+.wrap{
+  max-width:960px;
+  margin:auto;
+  padding:40px 20px 80px;
+}
+section{
+  background:var(--card);
+  border-radius:18px;
+  padding:32px;
+  margin-bottom:32px;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+h1,h2,h3{
+  margin-top:0;
+  letter-spacing:.04em;
+}
+h1{
+  font-size:32px;
+  text-align:center;
+}
+h2{
+  font-size:22px;
+  border-bottom:2px solid var(--accent);
+  padding-bottom:6px;
+  margin-bottom:20px;
+}
+p{margin:0 0 16px}
+.small{color:var(--muted); font-size:14px}
+.center{text-align:center}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+@media(max-width:800px){
+  .grid{grid-template-columns:1fr}
+}
+img{
+  max-width:100%;
+  border-radius:14px;
+}
+.quote{
+  font-size:20px;
+  text-align:center;
+  padding:32px;
+  background:#fff7f5;
+  border-radius:16px;
+  color:#5a3f38;
+}
+.timeline{
+  display:flex;
+  justify-content:space-between;
+  text-align:center;
+  gap:12px;
+  margin-top:24px;
+}
+.timeline div{
+  flex:1;
+}
+.badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#f1e1dc;
+  font-size:13px;
+}
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+@media(max-width:900px){
+  .card-grid{grid-template-columns:1fr}
+}
+.work{
+  background:#fffaf7;
+  border-radius:16px;
+  padding:20px;
+}
+.footer{
+  text-align:center;
+  color:#fff;
+  background:#6b3f36;
+  padding:40px 20px;
+  border-radius:18px;
+}
 </style>
 </head>
 
 <body>
 <div class="wrap">
 
-<div class="card">
-<h1>My Page</h1>
-<p class="small">今の自分を一言で</p>
-<textarea placeholder="まだ言葉にならないけど、今はこんな感じ"></textarea>
+<!-- HERO -->
+<section class="center">
+  <h1>白木 楓｜ナラティブ・ポートフォリオ</h1>
+  <p class="small">〜 お菓子で届ける「心の栄養」 〜</p>
+</section>
+
+<!-- PROFILE -->
+<section>
+  <h2>プロフィール｜遠回りしたから見えた景色</h2>
+  <div class="grid">
+    <div>
+      <p><strong>白木 楓（しらき かえで）｜15歳</strong></p>
+      <p>
+        中学1年生の夏休み明けから、中学3年生の秋ごろまで、<br>
+        私は「不登校」という長い時間を過ごしました。
+      </p>
+      <p>
+        学校に行けなくなったばかりの頃は、<br>
+        「自分が弱いからだ」「頑張れない自分が悪い」と、<br>
+        自分を責める気持ちでいっぱいでした。
+      </p>
+      <p>
+        そんな私を支えてくれたのが、家族と、台所でした。
+      </p>
+    </div>
+    <div>
+      <!-- 画像差し替え可 -->
+      <img src="https://placehold.co/600x400?text=Kitchen+Scene" alt="台所の風景">
+    </div>
+  </div>
+</section>
+
+<!-- EPISODE 1 -->
+<section>
+  <h2>Episode 1｜止まった時間と、台所の灯り</h2>
+  <div class="grid">
+    <div>
+      <p>
+        学校に行かなくなってから、<br>
+        家で過ごす時間が増えた私は、料理をするようになりました。
+      </p>
+      <p>
+        最初は、時間を持て余していただけでした。<br>
+        でも、包丁を握り、火を使い、味を調える時間は、<br>
+        不思議と心が落ち着く時間でした。
+      </p>
+      <p>
+        自分が作った料理を家族が食べて、<br>
+        「おいしいね」と笑ってくれたとき、<br>
+        初めて「ここにいていい」と思えました。
+      </p>
+    </div>
+    <div>
+      <img src="https://placehold.co/600x400?text=Cooking" alt="料理をする手元">
+    </div>
+  </div>
+</section>
+
+<!-- EPISODE 2 -->
+<section>
+  <h2>Episode 2｜お菓子がつなぐ「幸せ」</h2>
+  <div class="grid">
+    <div>
+      <img src="https://placehold.co/600x400?text=Sweets" alt="手作りお菓子">
+    </div>
+    <div>
+      <p>
+        料理からお菓子作りへ。<br>
+        甘い香りが部屋に広がると、家の空気がやわらぎました。
+      </p>
+      <p>
+        言葉にしなくても、<br>
+        お菓子は気持ちを届けてくれる。
+      </p>
+      <p>
+        「おいしく食べて、少し元気になってほしい」<br>
+        そんな思いが、私の中に芽生えました。
+      </p>
+      <p class="badge">気づき：食は、人の心に寄り添える</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section>
+  <h2>作品紹介｜一皿に込めた感謝の気持ち</h2>
+  <div class="card-grid">
+    <div class="work">
+      <img src="https://placehold.co/400x300?text=Cake">
+      <h3>家族の記念日ケーキ</h3>
+      <p class="small">「ありがとう」を形にした一品。</p>
+    </div>
+    <div class="work">
+      <img src="https://placehold.co/400x300?text=Soup">
+      <h3>旬の野菜のスープ</h3>
+      <p class="small">疲れている家族に、やさしい味を。</p>
+    </div>
+    <div class="work">
+      <img src="https://placehold.co/400x300?text=Japanese+Sweets">
+      <h3>季節を感じる和菓子</h3>
+      <p class="small">静かな時間と集中力をくれました。</p>
+    </div>
+  </div>
+</section>
+
+<!-- EPISODE 3 -->
+<section>
+  <h2>Episode 3｜志を胸に、学校へ戻る</h2>
+  <div class="timeline">
+    <div>
+      <span class="badge">中1</span>
+      <p class="small">不登校の始まり</p>
+    </div>
+    <div>
+      <span class="badge">中2</span>
+      <p class="small">料理との出会い</p>
+    </div>
+    <div>
+      <span class="badge">中3 夏</span>
+      <p class="small">進路を考え始める</p>
+    </div>
+    <div>
+      <span class="badge">中3 秋</span>
+      <p class="small">登校復帰・受験勉強</p>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING -->
+<section>
+  <h2>不登校の経験が教えてくれたこと</h2>
+  <ul>
+    <li>支えてくれる人の存在の大切さ</li>
+    <li>遠回りにも、意味があるということ</li>
+    <li>料理は、自分と他者をつなぐ「言葉」になること</li>
+  </ul>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  「不登校だった時間は、<br>
+  私にとって『おいしい』という魔法を手に入れるための、<br>
+  大切な準備期間でした。」
+</section>
+
+<!-- FUTURE -->
+<section>
+  <h2>これからの展望｜プロへの第一歩</h2>
+  <p>
+    調理科のある高校に進学し、<br>
+    基礎から料理とお菓子作りを学びたいと考えています。
+  </p>
+  <p>
+    将来は料理人か、パティシエか、まだ迷っています。<br>
+    でも、「人の心をあたためる食」を作りたいという気持ちは変わりません。
+  </p>
+</section>
+
+<!-- FOOTER -->
+<section class="footer">
+  <h2>将来の夢</h2>
+  <p>
+    いつか、誰かが少し疲れたとき、<br>
+    ふっと立ち寄れる場所で、<br>
+    心においしい料理やお菓子を届けられる人になりたい。
+  </p>
+  <p class="small">ご覧いただき、ありがとうございました。</p>
+</section>
+
 </div>
-
-<div class="card">
-<h2>Log（記録）</h2>
-<input id="title" placeholder="今日のタイトル">
-<textarea id="text" placeholder="出来事・気持ち・迷いなど自由に"></textarea>
-<input id="img" type="file" accept="image/*">
-<input id="yt" placeholder="YouTube URL（任意）">
-<button onclick="addLog()">追加</button>
-
-<div id="logs"></div>
-</div>
-
-<div class="card">
-<h2>Story（問い）</h2>
-<p class="small">あとから考えるための問い</p>
-<ul>
-<li>この出来事、前にも似たことなかった？</li>
-<li>当時の自分と今の自分、何が違う？</li>
-<li>失敗した時、毎回どんな選択をしている？</li>
-</ul>
-</div>
-
-</div>
-
-<script>
-const logs = document.getElementById("logs");
-
-function addLog(){
-  const title = document.getElementById("title").value;
-  const text = document.getElementById("text").value;
-  const img = document.getElementById("img").files[0];
-  const yt = document.getElementById("yt").value;
-
-  const div = document.createElement("div");
-  div.className="log";
-  div.innerHTML = `<h3>${title}</h3><p>${text}</p>`;
-
-  if(img){
-    const imgEl = document.createElement("img");
-    imgEl.src = URL.createObjectURL(img);
-    div.appendChild(imgEl);
-  }
-
-  if(yt){
-    div.innerHTML += `<iframe src="https://www.youtube.com/embed/${yt.split("v=")[1]}" frameborder="0"></iframe>`;
-  }
-
-  logs.prepend(div);
-}
-</script>
 </body>
 </html>
